@@ -90,6 +90,75 @@ export default class App extends Component {
        })
     };
 
+    onActiveItems = () => {
+        const notAvtiveItems = this.state.todoData.filter( (elem) => elem.done === true );
+        const activeItems = this.state.todoData.filter( (elem) => elem.done ===false );
+
+        notAvtiveItems.forEach( (item) => {
+            item.notDisplay = true; 
+        });
+
+        activeItems.forEach( (item) => {
+            item.notDisplay = false; 
+        });
+
+        const newArr = [...activeItems, ...notAvtiveItems];
+        
+        newArr.sort( function(a,b) {
+            return a.id - b.id
+        });
+
+        this.setState( ({todoData}) => {
+            return({
+                todoData: newArr
+            })
+        });
+    }
+
+    onDoneItems = () => {
+        const notAvtiveItems = this.state.todoData.filter( (elem) => elem.done === true );
+        const activeItems = this.state.todoData.filter( (elem) => elem.done ===false );
+
+        activeItems.forEach( (item) => {
+            item.notDisplay = true; 
+        });
+
+        notAvtiveItems.forEach( (item) => {
+            item.notDisplay = false; 
+        });
+
+        const newArr = [...activeItems, ...notAvtiveItems];
+        
+        newArr.sort( function(a,b) {
+            return a.id - b.id
+        });
+
+        this.setState( ({todoData}) => {
+            return({
+                todoData: newArr
+            })
+        });
+
+    }
+
+    onAllItems =() => {
+        const allItems = [...this.state.todoData];
+
+        allItems.forEach( (item) => {
+            item.notDisplay = false;
+        })
+        
+        allItems.sort( function(a,b) {
+            return a.id - b.id
+        });
+
+        this.setState( ({todoData}) => {
+            return({
+                todoData: allItems
+            })
+        })
+    }
+
 
     render() {
         const countDone = this.state.todoData.filter( (elem) => elem.done ).length;
@@ -102,7 +171,12 @@ export default class App extends Component {
     
                 <div className='top-panel d-flex'>
                     <SearchPanel />
-                    <ItemStatusFilter />
+                    <ItemStatusFilter 
+                        onActiveItems={this.onActiveItems}
+                        onAllItems={this.onAllItems}
+                        onDoneItems={this.onDoneItems}
+                        todos={this.state.todoData} 
+                    />
                 </div>
     
                 <ToDoList 

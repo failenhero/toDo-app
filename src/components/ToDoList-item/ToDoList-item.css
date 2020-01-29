@@ -32,3 +32,9 @@
     font-weight: bold;
 }
 
+.not-display {
+    display: none;
+    border-color: white;
+}
+
+

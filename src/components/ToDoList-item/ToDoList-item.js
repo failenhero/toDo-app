@@ -9,7 +9,7 @@ export default class ToDoListItem extends Component {
         const { label, onDeleted, 
             onToggleDone, 
             onToggleImportant,
-            done, important } = this.props;
+            done, important, notDisplay } = this.props;
         let classTDLItem = 'todo-list-item';
         let classTDLItemLabel = 'ToDoList-item-label';
 
@@ -19,6 +19,10 @@ export default class ToDoListItem extends Component {
 
         if(important === true) {
             classTDLItemLabel += ' important';
+        }
+
+        if(notDisplay === true) {
+            classTDLItem += ' not-display';
         }
 
 
