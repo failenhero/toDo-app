@@ -4,3 +4,8 @@
     flex-grow: 1;
     margin-right: 3px;
 }
+
+.not-display {
+    display: none;
+    border-color: white;
+}

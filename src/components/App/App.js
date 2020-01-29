@@ -45,6 +45,7 @@ export default class App extends Component {
             label,
             important: false,
             done: false,
+            notDisplay: false,
             id: this.maxID++
         }
     }
@@ -90,6 +91,16 @@ export default class App extends Component {
        })
     };
 
+    activeButtonClass = (btnAllClass, btnActiveClass, btnDoneClass) => {
+        const btnAll = document.getElementById('btnAll');
+        const btnActive = document.getElementById('btnActive');
+        const btnDone = document.getElementById('btnDone');
+        
+        btnAll.className = btnAllClass;
+        btnActive.className = btnActiveClass;
+        btnDone.className = btnDoneClass;
+    }
+
     onActiveItems = () => {
         const notAvtiveItems = this.state.todoData.filter( (elem) => elem.done === true );
         const activeItems = this.state.todoData.filter( (elem) => elem.done ===false );
@@ -113,6 +124,8 @@ export default class App extends Component {
                 todoData: newArr
             })
         });
+
+        this.activeButtonClass('btn btn-outline-secondary', 'btn btn-info', 'btn btn-outline-secondary');
     }
 
     onDoneItems = () => {
@@ -139,6 +152,8 @@ export default class App extends Component {
             })
         });
 
+        this.activeButtonClass('btn btn-outline-secondary', 'btn btn-outline-secondary', 'btn btn-info');
+
     }
 
     onAllItems =() => {
@@ -157,6 +172,8 @@ export default class App extends Component {
                 todoData: allItems
             })
         })
+
+        this.activeButtonClass('btn btn-info', 'btn btn-outline-secondary', 'btn btn-outline-secondary');
     }
 
 
@@ -170,7 +187,8 @@ export default class App extends Component {
                 <AppHeader toDo={countNotDone} done={countDone} />
     
                 <div className='top-panel d-flex'>
-                    <SearchPanel />
+                    <SearchPanel 
+                        todos={this.state.todoData}/>
                     <ItemStatusFilter 
                         onActiveItems={this.onActiveItems}
                         onAllItems={this.onAllItems}

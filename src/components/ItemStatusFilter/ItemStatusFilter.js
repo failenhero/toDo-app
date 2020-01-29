@@ -13,19 +13,22 @@ export default class ItemStatusFilter extends Component {
                         
                                 <button type="button"
                                         className="btn btn-info"
-                                        onClick={onAllItems}>
+                                        onClick={onAllItems}
+                                        id='btnAll'>
                                         All
                                 </button>
 
                                 <button type="button" 
                                         className="btn btn-outline-secondary"
-                                        onClick={onActiveItems}>        
+                                        onClick={onActiveItems}
+                                        id='btnActive'>        
                                         Active
                                 </button>
 
                                 <button type="button"
                                         className="btn btn-outline-secondary"
-                                        onClick={onDoneItems}>
+                                        onClick={onDoneItems}
+                                        id='btnDone'>
                                         Done
                                 </button>
 
